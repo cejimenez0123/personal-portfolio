@@ -1,0 +1,43 @@
+<!-- Imports header and footer -->
+{% extends 'portfolio/base.html' %}
+
+<!-- Uses imported header -->
+{% block content %}
+
+<!-- Tells Django to use static files -->
+{% load static %}
+
+<!-- Main page content -->
+<div class="row justify-content-center my-3">
+    <div class="col-5">
+      <img src="{% static 'portfolio/Ronny.jpg' %}" class="img-fluid">
+    </div>
+  </div>
+  
+  <div class="row justify-content-center mb-3">
+    <div class="col-md-9 text-center">
+      <h1 id="hometext" class="font-weight-bold">Welcome to the place that showcases <br> some of my work and ideas 😁 </h1>
+    </div>
+  </div>
+  
+  <h2 class="mt-5 date">Portfolio</h2>
+  <hr>
+  <div class="row">
+    {% for project in projects %}
+    <div class="col-lg-4 col-md-6">
+  
+      {% if project.url %}
+      <a href="{{ project.url }}">
+        <img src="{{ project.image.url }}" class="img-fluid mb-2">
+      </a>
+      {% else %}
+  
+      <img src="{{ project.image.url }}" class="img-fluid mb-2">
+      {% endif %}
+      <h3>{{ project.title }}</h3>
+      <p>{{ project.description }}</p>
+  
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

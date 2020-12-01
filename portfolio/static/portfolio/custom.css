@@ -1,0 +1,49 @@
+.navbar-nav .nav-link {
+    color: rgba(0,0,0,1) !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: rgba(0,0,0,.5) !important;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+.main-name {
+    font-size: 1.4em;
+}
+hr {
+    width: 90%;
+    
+}
+a {
+    text-decoration: none;
+}
+
+#blogtitle {
+    font-size: 3.7rem;
+}
+#numbertitle {
+    font-size: 1.6rem;
+}
+
+.linebelowcomment {
+    width: 90% !important;
+}
+
+#blog_image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 34em;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 992px) {
+    #hometext {
+        font-size: 3rem;
+    }
+    #blogdetailtitle {
+        font-size: 3.4rem !important;
+    }
+}
