@@ -6,9 +6,9 @@
 
 <h1 id="blogtitle" class="font-weight-bold text-center mt-3"> Moon Blog 🌙 </h1>
 
-<h3 id="numbertitle" class="text-center mb-5">Ronard has written {{ blogs.count }} blog{{ blogs.count|pluralize }}</h3>
+<h3 id="numbertitle" class="text-center mb-5">Ronard has written {{ count }} blog{{ count|pluralize }}</h3>
 
-{% for blog in blogs %}
+{% for blog in page.object_list %}
 <div class="row justify-content-center my-5">
   <div class="col-md-10">
     <a href="{% url 'blog:detail' blog.id %}">
@@ -19,5 +19,20 @@
   </div>
 </div>
 {% endfor %}
+
+<!-- Pagination -->
+  <div class="row justify-content-center">
+      <div class="col-xs-1 justify-content-center">
+        {% if page.has_previous %}
+          <a href="{% url 'blog:all_blogs' %}?page={{ page.previous_page_number }}"> Previous </a>
+        {% endif %}
+        {% if page.has_next %}
+          <a href="{% url 'blog:all_blogs' %}?page={{ page.next_page_number }}"> Next </a>
+        {% endif %}
+      </div>
+  </div>
+  <p class="text-right">Page {{ page.number }}</p>
+
+
 
 {% endblock %}
