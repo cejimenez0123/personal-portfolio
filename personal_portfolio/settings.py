@@ -132,3 +132,11 @@ try:
     print('Local Settings. Not in production')
 except ImportError:
     print('There is no local file. You are on production')
+
+# Sending emails - SMTP Set up
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ronarddevelops@gmail.com'
+EMAIL_HOST_PASSWORD = 'Patr!A2527'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+Email_USE_SSL = False

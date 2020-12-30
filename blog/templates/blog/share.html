@@ -1,0 +1,25 @@
+<!-- Imports header and footer -->
+{% extends 'portfolio/base.html' %}
+
+<!-- Uses imported header -->
+{% block content %}
+{% if sent %}
+    <h1>E-mail successfully sent</h1>
+    <p> 
+        "{{ blog.title }}" was successfully sent to {{ form.cleaned_data.to }}.
+    </p>
+{% else %}
+    <h1> Share "{{ blog.title }}" by e-mail</h1>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Send" class="btn btn-info">
+    </form>
+{% endif %}
+<br>
+<a href="{% url 'blog:all_blogs'%}"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-back" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
+  </svg> Back
+</a>
+
+{% endblock %}
