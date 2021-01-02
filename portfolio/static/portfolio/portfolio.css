@@ -12,24 +12,42 @@ body {
 .main-name {
     font-size: 1.4em;
 }
-hr {
-    width: 90%;
-    
+.comment-line {
+    width: 70%;
 }
 a {
     text-decoration: none;
 }
 
 #blogtitle {
-    font-size: 3.7rem;
+    font-size: 3.6rem;
 }
 #numbertitle {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
 }
 
 .linebelowcomment {
-    width: 90% !important;
+    width: 90%;
 }
+.comment-section {
+    padding-top: 1.5em;
+}
+.comment_user {
+    color: #0c7ea1;
+}
+.line_between_comments{
+    width: 40%;
+}
+.comment_date{
+    color: rgb(113, 109, 109);
+    font-size: .85rem;
+    text-align: right;
+}
+.comment_body{
+    margin-top: -12px;
+    padding-bottom: -5px;
+}
+
 
 #blog_image {
     display: block;

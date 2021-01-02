@@ -122,8 +122,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
-# Ronard - Tells the app the location where images should be saved
+# Telling Django to use time zone
+USE_TZ = True
+TIME_ZONE = 'America/New_York' 
 
+# Ronard - Tells the app the location where images should be saved
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -136,7 +139,7 @@ except ImportError:
 # Sending emails - SMTP Set up
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'ronarddevelops@gmail.com'
-EMAIL_HOST_PASSWORD = 'Patr!A2527'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 Email_USE_SSL = False
