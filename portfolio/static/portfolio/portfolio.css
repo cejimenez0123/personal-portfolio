@@ -48,6 +48,13 @@ a {
     padding-bottom: -5px;
 }
 
+.blog_tag_copy{
+    padding-bottom: 10rem;
+}
+
+.blog_outer_description{
+    margin-top: -10px;
+}
 
 #blog_image {
     display: block;

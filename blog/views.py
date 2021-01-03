@@ -3,17 +3,26 @@ from .models import Blog, Comment
 from django.core.paginator import Paginator
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
+from taggit.models import Tag
 
-def all_blogs(request):
+def all_blogs(request, tag_slug=None):
     # All Written blogs
     blogs = Blog.objects.order_by('-date')
+    tag = None
+
+    # Search blogs by tag
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        blogs = blogs.filter(tags__in=[tag])
+
+    # Pagination logic
     paginator = Paginator(blogs, 10) # Number of blogs per page
     page_num = request.GET.get('page')
     page = paginator.get_page(page_num)
     
-    return render(request, 'blog/all_blogs.html', {
-        'page': page,
-        'count': paginator.count
+    return render(request, 'blog/all_blogs.html', { 'page': page,
+                                                    'count': paginator.count,
+                                                    'tag': tag
     })
 
 def detail(request, blog_id):

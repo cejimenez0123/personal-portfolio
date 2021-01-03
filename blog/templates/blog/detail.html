@@ -3,6 +3,9 @@
 
 <!-- Uses imported header -->
 {% block content %}
+<div class="text-right blog_tag_copy">
+    <p> Tags: <strong >{{ blog.tags.all|join:", " }}</strong> </p>
+</div>
 
 <h1 class="text-center mt-5" id="blogdetailtitle">{{ blog.title }}</h1>
 <h5 class="text-center text-muted mb-5">{{ blog.date|date:'F jS Y' }}</h5>
@@ -63,5 +66,7 @@
 </div>
 
 <br>
-<a class="btn btn-info btn-sm" href="{% url 'blog:all_blogs' %}"> Back </a>
+<p class="text-right">
+    <a class="btn btn-info btn-sm" href="{% url 'blog:all_blogs' %}"> Back </a>
+</p>
 {% endblock %}

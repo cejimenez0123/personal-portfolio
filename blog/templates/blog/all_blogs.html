@@ -15,7 +15,16 @@
       <h2>{{ blog.title }}</h2>
     </a>
     <h5 class="text-muted">{{ blog.date|date:'M d Y'|upper }}</h5>
-    <h5>{{ blog.description|striptags|truncatechars:100 }}</h5>
+    <p> 
+      Tags:
+      {% for tag in blog.tags.all %}
+        <a href="{% url "blog:blog_list_by_tag" tag.slug %}">
+          {{ tag.name }}
+        </a>
+        {% if not forloop.last %}, {% endif %}
+      {% endfor %} 
+    </p>
+      <h5 style="margin-top: -10px">{{ blog.description|striptags|truncatechars:100 }}</h5>
     <a href="{% url 'blog:post_share' blog.id %}">Share: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
       <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
     </svg></a>
@@ -36,6 +45,13 @@
   </div>
   <p class="text-right">Page {{ page.number }}</p>
 <!-- End Pagination -->
+{% if tag %}
+  <h2 class="text-center">Posts tagged with "{{ tag.name }}"</h2>
+  <br>
+  <p class="text-center">
+    <a class="btn btn-info" href="{% url 'blog:all_blogs' %}"> All Posts </a>
+  </p>
+  {% endif %}
 
 
 {% endblock %}
