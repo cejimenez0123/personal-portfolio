@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Count
 from .models import Blog, Comment
 from django.core.paginator import Paginator
 from .forms import EmailPostForm, CommentForm
@@ -45,13 +46,19 @@ def detail(request, blog_id):
             new_comment.save()
     else:
         comment_form = CommentForm()
+    
+    # List of similar posts
+    post_tags_ids = blog.tags.values_list('id', flat=True)
+    similar_posts = Blog.objects.filter(tags__in=post_tags_ids).exclude(id=blog.id)
+    similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags')[:3]
 
     return render(request, 
                 'blog/detail.html', 
                 {'blog': blog, 
                 'comments': comments, 
                 'new_comment': new_comment, 
-                'comment_form': comment_form})
+                'comment_form': comment_form, 
+                'similar_posts': similar_posts})
 
 # Share blog using email
 def blog_share(request, blog_id):

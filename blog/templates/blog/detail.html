@@ -6,7 +6,6 @@
 <div class="text-right blog_tag_copy">
     <p> Tags: <strong >{{ blog.tags.all|join:", " }}</strong> </p>
 </div>
-
 <h1 class="text-center mt-5" id="blogdetailtitle">{{ blog.title }}</h1>
 <h5 class="text-center text-muted mb-5">{{ blog.date|date:'F jS Y' }}</h5>
 <a class="btn btn-info btn-sm" href="{% url 'blog:all_blogs' %}"> Back </a>
@@ -48,7 +47,16 @@
         {% empty %}
         <p> There are no comments yet. </p>
         {% endfor %}
-    
+    <!-- Similar Posts -->
+    <!-- The similar functionality function does not work. Error the filter in the views.py -->
+    <!-- <h2>Similar Posts</h2>
+    {% for blog in similar_blogs %}
+        <p>
+            <a href="{{ blog.get_absolute_url }}"> {{ blog.title }}</a>
+        </p>
+        {% empty %}
+        There are no similar blog posts yet.
+    {% endfor %} -->
     <!-- Form to submit comments -->
         <br>
         {% if new_comment %}
