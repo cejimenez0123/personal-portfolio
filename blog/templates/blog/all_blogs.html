@@ -1,12 +1,31 @@
 {% extends "portfolio/base.html" %}
+{% load blog_tags %}
 
 {% load static %}
-
 {% block content %}
 
-<h1 id="blogtitle" class="font-weight-bold text-center mt-3"> Moon Blog 🌙 </h1>
+<div class="row">
+  <div class="col-md-8">
+     <h1 id="blogtitle" class="font-weight-bold text-center mt-3"> Moon Blog 🌙 </h1>
+    <h3 id="numbertitle" class="text-center mb-5">Ronard has written {{ count }} blog{{ count|pluralize }}</h3>
+  </div>
+  <div class="col-md-4 col-sm">
+    <!-- Displays most liked posts -->
+    {% get_most_commented_posts as most_commented_posts %}
+    <div class="card" >
+      <div class="card-body">
+        <h5 class="card-title">Posts with most interaction</h5>
+        {% for post in most_commented_posts %}
+        <ul>
+          <a href="{{ post.id }}" class="card-link">{{ post.title|truncatechars:25 }}</a>
+        </ul>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- End of liked posts -->
+  </div>
+</div>
 
-<h3 id="numbertitle" class="text-center mb-5">Ronard has written {{ count }} blog{{ count|pluralize }}</h3>
 
 {% for blog in page.object_list %}
 <div class="row justify-content-center my-5">
