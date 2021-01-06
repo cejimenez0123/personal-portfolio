@@ -3,5 +3,5 @@ from django.http import HttpResponse
 from .models import Project
 
 def home(request):
-    projects = Project.objects.all()
+    projects = Project.objects.order_by('title')
     return render(request, 'portfolio/home.html', {'projects' : projects})

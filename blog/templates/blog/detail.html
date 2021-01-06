@@ -16,7 +16,7 @@
     </a>
 </div>
 {% if blog.image %}
-    <img src="{{ blog.image.url }}" alt=" Blog Image" id="blog_image">
+    <img class="col-md-9 col-sm-8 pt-3" src="{{ blog.image.url }}" alt="Blog Image" id="blog_image">
 {% endif %}
 
 <p class="rounded"> {{ blog.description|safe }} </p>
