@@ -1,0 +1,26 @@
+{% extends "portfolio/base.html" %}
+
+{% load static %}
+{% block content %}
+    <div class="container my-3">
+        <h2>Search results: </h2>
+        {% for post in allPosts  %}
+            <div class="row my-5">
+                <div class="col-md-10">
+                    <a href="{% url 'blog:detail' post.id %}">
+                        <h3>{{post.title}}</h3>
+                    </a>
+                    <p style="margin-top: -6x; margin-bottom: -0px;" class="text-muted">{{ post.date|date:'M d Y'|upper }}</p>
+                    <h5 class="card-text mb-auto">{{post.description|striptags|truncatechars:150}}</h5>
+                    <hr class="linebelowcomment"> 
+                </div>
+            </div>
+        {% empty %}
+            <br>
+                <h2> Umm... I don't see any blog posts with that name. Try again? </h2>
+            {% endfor %}
+    </div>
+    <p class="text-center">
+        <a class="btn btn-info" href="{% url 'blog:all_blogs' %}"> All Posts </a>
+    </p>
+{% endblock %}

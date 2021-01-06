@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
 from taggit.models import Tag
+from django.db.models import Q
 
 def all_blogs(request, tag_slug=None):
     # All Written blogs
@@ -85,3 +86,15 @@ def blog_share(request, blog_id):
     return render(request, 'blog/share.html', {'blog': blog,
                                                 'form': form,
                                                 'sent': sent })
+
+#Blog search functionality
+def search_query(request):
+    if request.method == 'GET':
+        query = request.GET.get('search')
+        # post = Blog.objects.all().filter(title = search)
+        allPosts = Blog.objects.filter(title__icontains=query)
+        params = {'allPosts': allPosts}
+
+        return render(request, 'blog/search.html', params)
+
+    # return render(request, 'blog/search.html', {'post': post})

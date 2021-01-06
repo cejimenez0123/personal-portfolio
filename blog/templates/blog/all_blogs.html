@@ -6,15 +6,29 @@
 
 <div class="row">
   <div class="col-md-8">
-     <h1 id="blogtitle" class="font-weight-bold text-center mt-3"> Moon Blog 🌙 </h1>
-    <h3 id="numbertitle" class="text-center mb-5">Ronard has written {{ count }} blog{{ count|pluralize }}</h3>
+      <h1 id="blogtitle" class="font-weight-bold text-center mt-3"> Moon Blog 🌙 </h1>
+      <h3 id="numbertitle" class="text-center mb-5">Ronard has written {{ count }} blog post{{ count|pluralize }}</h3>
+      
+      <!-- Blog Search functionality -->
+      <form action="{% url 'blog:search' %}" method="GET">
+        <div class="container col-8">
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Search</span>
+            </div>
+          <input name="search" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-info btn-sm">Go</button>
+          </div>
+        </div>
+      </form>
   </div>
   <div class="col-md-4 col-sm">
     <!-- Displays most liked posts -->
     {% get_most_commented_posts as most_commented_posts %}
     <div class="card" >
       <div class="card-body">
-        <h5 class="card-title">Posts with most interaction</h5>
+        <h5 class="card-title">Posts with most interactions</h5>
         {% for post in most_commented_posts %}
         <ul>
           <a href="{{ post.id }}" class="card-link">{{ post.title|truncatechars:25 }}</a>
@@ -26,18 +40,17 @@
   </div>
 </div>
 
-
 {% for blog in page.object_list %}
 <div class="row justify-content-center my-5">
   <div class="col-md-10">
     <a href="{% url 'blog:detail' blog.id %}">
-      <h2>{{ blog.title }}</h2>
+      <h3>{{ blog.title }}</h3>
     </a>
-    <h5 class="text-muted">{{ blog.date|date:'M d Y'|upper }}</h5>
+    <p style="margin-top: -6x; margin-bottom: -0px;" class="text-muted">{{ blog.date|date:'M d Y'|upper }}</p>
     <p> 
       Tags:
       {% for tag in blog.tags.all %}
-        <a href="{% url "blog:blog_list_by_tag" tag.slug %}">
+        <a href="{% url 'blog:blog_list_by_tag' tag.slug %}">
           {{ tag.name }}
         </a>
         {% if not forloop.last %}, {% endif %}
@@ -64,6 +77,7 @@
   </div>
   <p class="text-right">Page {{ page.number }}</p>
 <!-- End Pagination -->
+
 {% if tag %}
   <h2 class="text-center">Posts tagged with "{{ tag.name }}"</h2>
   <br>
@@ -71,6 +85,5 @@
     <a class="btn btn-info" href="{% url 'blog:all_blogs' %}"> All Posts </a>
   </p>
   {% endif %}
-
 
 {% endblock %}

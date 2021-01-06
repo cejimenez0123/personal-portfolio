@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from taggit.managers import TaggableManager
 
 class Blog(models.Model):
@@ -11,6 +12,9 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse('blog:detail')
 
 class Comment(models.Model):
     post = models.ForeignKey(Blog, 

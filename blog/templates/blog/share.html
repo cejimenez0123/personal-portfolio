@@ -4,14 +4,17 @@
 <!-- Uses imported header -->
 {% block content %}
 {% if sent %}
-    <h1>E-mail successfully sent</h1>
+    <h2>E-mail successfully sent</h2>
     <p> 
         "{{ blog.title }}" was successfully sent to {{ form.cleaned_data.to }}.
     </p>
 {% else %}
-    <h1> Share "{{ blog.title }}" by e-mail</h1>
+    <h2> Share "{{ blog.title }}" by e-mail</h2>
+    <br>
     <form method="post">
-        {{ form.as_p }}
+        <div class="form-group"> 
+            {{ form.as_p }}
+        </div>
         {% csrf_token %}
         <input type="submit" value="Send" class="btn btn-info">
     </form>

@@ -40,7 +40,7 @@
             <p class="info">
                 <strong class="comment_user"> {{ comment.name }} </strong> 
             </p>
-            <p class="comment_body">{{ comment.body|linebreaks }}</p>
+            <p style="margin-bottom: -10px;" class="comment_body">{{ comment.body|linebreaks }}</p>
             <span class="comment_date">{{ comment.created|date:'M d Y - h:i a' }}</span> 
             <hr class="line_between_comments">
         </div>
